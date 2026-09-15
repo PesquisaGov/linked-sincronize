@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#071326">
   <meta name="description" content="Encontre oportunidades e participe de entrevistas de emprego por videochamada pelo aplicativo Linked Sincronize.">
-  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="./Linked-Sincronize-logo.png" type="image/png">
   <title>Linked Sincronize | Entrevistas por vídeo</title>
   <style>
     :root {
@@ -83,14 +83,15 @@
       place-items: center;
       width: 46px;
       height: 46px;
-      border: 2px solid var(--gold);
-      border-radius: 15px;
-      background: var(--gold);
+      overflow: hidden;
+      border: 1px solid rgba(184, 215, 250, .28);
+      border-radius: 50%;
+      background: var(--night-850);
       color: var(--night-950);
-      box-shadow: 0 11px 28px rgba(255, 212, 71, .18);
+      box-shadow: 0 11px 28px rgba(0, 0, 0, .28), 0 0 0 3px rgba(255, 212, 71, .08);
     }
 
-    .brand-icon { display: block; width: 31px; height: 31px; }
+    .brand-icon { display: block; width: 100%; height: 100%; object-fit: cover; }
     .toplink { color: var(--sky); font-size: .95rem; font-weight: 700; text-decoration: none; }
     .toplink:hover, .toplink:focus-visible { color: var(--gold); }
 
@@ -301,8 +302,8 @@
       body.has-floating-download { padding-bottom: calc(89px + env(safe-area-inset-bottom)); }
       .topbar { padding: 17px 0; }
       .brand { gap: 9px; font-size: .97rem; }
-      .mark { flex-basis: 42px; width: 42px; height: 42px; border-radius: 13px; }
-      .brand-icon { width: 28px; height: 28px; }
+      .mark { flex-basis: 42px; width: 42px; height: 42px; border-radius: 50%; }
+      .brand-icon { width: 100%; height: 100%; }
       .toplink { font-size: .82rem; }
       .hero { gap: 35px; padding: 50px 0 64px; }
       h1 { margin: 16px 0 20px; font-size: clamp(2.75rem, 14vw, 4.4rem); }
@@ -344,13 +345,7 @@
   <header class="shell topbar">
     <a class="brand" href="./" aria-label="Linked Sincronize, início">
       <span class="mark" aria-hidden="true">
-        <svg class="brand-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
-          <path d="M8 21h32v21H8V21Z" fill="#071326"/>
-          <path d="M11 25h26v13H11V25Z" fill="#123765"/>
-          <path d="M6 19h36v6H6v-6Z" fill="#071326"/>
-          <path d="m15.1 8.8 18-2.5 1.7 12.2-18 2.5-1.7-12.2Z" fill="#FFF9EB"/>
-          <path d="m21 14.7 2.6 2.4 5.4-6" stroke="#D09A16" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+        <img class="brand-icon" src="./Linked-Sincronize-logo.png" alt="">
       </span>
       <span>Linked Sincronize</span>
     </a>
@@ -364,16 +359,16 @@
         <h1 id="hero-title">Conecte-se à sua próxima oportunidade. <span>Participe da entrevista por vídeo.</span></h1>
         <p class="lead">A Linked Sincronize aproxima candidatos e empresas por meio de um aplicativo para acompanhar vagas, receber orientações e participar de entrevistas por videochamada.</p>
 
+        <div class="actions">
+          <a class="button button-primary" href="./Sincronizando.apk" download="Linked-Sincronize.apk" data-download-link>Baixar aplicativo <span aria-hidden="true">↓</span></a>
+          <a class="button button-secondary" href="#como-participar">Ver como funciona</a>
+        </div>
+        <p class="download-note">Aplicativo Android · download direto</p>
+
         <div class="incentive-card" aria-label="Entrevista por vídeo pela Linked Sincronize">
           <span class="incentive-value">Vídeo online</span>
           <span><strong>Entrevista por videochamada</strong><small>Agendamento e orientações pelo aplicativo</small></span>
         </div>
-
-        <div class="actions">
-          <a class="button button-primary" href="./Sincronizando.apk" download="Linked-Sincronize.apk" data-download-link>Baixar aplicativo de teste <span aria-hidden="true">↓</span></a>
-          <a class="button button-secondary" href="#como-participar">Ver como funciona</a>
-        </div>
-        <p class="download-note">APK de teste para Android · download direto</p>
       </div>
 
       <div class="hero-art" aria-hidden="true">
@@ -401,10 +396,10 @@
       <div class="section-heading">
         <div class="section-kicker">01 — O caminho</div>
         <h2 id="steps-title">Como funciona</h2>
-        <p>Baixe o aplicativo de teste, acompanhe as orientações e participe das entrevistas de emprego por videochamada.</p>
+        <p>Baixe o aplicativo, acompanhe as orientações e participe das entrevistas de emprego por videochamada.</p>
       </div>
       <div class="steps">
-        <article class="step"><div class="step-number">01</div><h3>Baixe o aplicativo</h3><p>Toque no botão de download e aguarde o APK de teste terminar de baixar.</p></article>
+        <article class="step"><div class="step-number">01</div><h3>Baixe o aplicativo</h3><p>Toque no botão de download e aguarde o aplicativo terminar de baixar.</p></article>
         <article class="step"><div class="step-number">02</div><h3>Complete seu perfil</h3><p>Abra o aplicativo no Android e siga as orientações para acompanhar as oportunidades.</p></article>
         <article class="step"><div class="step-number">03</div><h3>Participe da entrevista</h3><p>No horário marcado, entre na videochamada e converse com a empresa pelo aplicativo.</p></article>
       </div>
@@ -432,12 +427,13 @@
     const downloadButton = document.querySelector('[data-download-link]');
     const actionGroup = downloadButton.closest('.actions');
     const updateFloatingDownload = function () {
-      const shouldFloat = window.scrollY > 120;
+      const shouldFloat = window.matchMedia('(max-width: 760px)').matches || window.scrollY > 120;
       downloadButton.classList.toggle('is-floating', shouldFloat);
       actionGroup.classList.toggle('has-floating-download', shouldFloat);
       document.body.classList.toggle('has-floating-download', shouldFloat);
     };
     window.addEventListener('scroll', updateFloatingDownload, { passive: true });
+    window.addEventListener('resize', updateFloatingDownload);
     updateFloatingDownload();
     const triggerApkDownload = function () {
       const directDownload = document.createElement('a');
