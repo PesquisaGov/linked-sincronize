@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071326">
+  <meta name="description" content="Encontre oportunidades e participe de entrevistas de emprego por videochamada pelo aplicativo Linked Sincronize.">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Linked Sincronize | Entrevistas por vídeo</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --night-950: #050d1c;
+      --night-900: #071326;
+      --night-850: #0a1b34;
+      --navy-700: #123765;
+      --navy-600: #1b4c82;
+      --gold: #ffd447;
+      --gold-soft: #ffe9a6;
+      --paper: #fff9eb;
+      --ink: #10213a;
+      --sky: #b8d7fa;
+      --muted: #a9bfd8;
+      --mint: #61e1ae;
+      --coral: #ff927b;
+      --line: rgba(179, 216, 255, .2);
+      --panel: rgba(15, 45, 81, .78);
+      --shadow: 0 28px 70px rgba(0, 0, 0, .28);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      min-width: 320px;
+      margin: 0;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 92% -6%, rgba(50, 137, 255, .24), transparent 32rem),
+        radial-gradient(circle at -9% 43%, rgba(255, 212, 71, .1), transparent 25rem),
+        linear-gradient(180deg, var(--night-900), var(--night-950) 70%);
+      color: var(--paper);
+      font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body::before {
+      position: fixed;
+      z-index: -1;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(255, 255, 255, .018) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .018) 1px, transparent 1px);
+      background-size: 44px 44px;
+      content: "";
+      mask-image: linear-gradient(to bottom, black, transparent 70%);
+    }
+
+    a { color: inherit; }
+    .shell { width: min(1160px, calc(100% - 36px)); margin: 0 auto; }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 22px 0;
+      border-bottom: 1px solid rgba(179, 216, 255, .1);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      color: var(--paper);
+      font-size: 1.02rem;
+      font-weight: 850;
+      letter-spacing: .01em;
+      text-decoration: none;
+    }
+
+    .mark {
+      display: grid;
+      flex: 0 0 46px;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border: 2px solid var(--gold);
+      border-radius: 15px;
+      background: var(--gold);
+      color: var(--night-950);
+      box-shadow: 0 11px 28px rgba(255, 212, 71, .18);
+    }
+
+    .brand-icon { display: block; width: 31px; height: 31px; }
+    .toplink { color: var(--sky); font-size: .95rem; font-weight: 700; text-decoration: none; }
+    .toplink:hover, .toplink:focus-visible { color: var(--gold); }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(320px, .98fr);
+      gap: clamp(38px, 6vw, 76px);
+      align-items: center;
+      padding: clamp(60px, 9vw, 108px) 0 92px;
+    }
+
+    .eyebrow, .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold);
+      font-size: .82rem;
+      font-weight: 900;
+      letter-spacing: .14em;
+      line-height: 1.3;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before, .section-kicker::before { width: 28px; height: 2px; background: var(--gold); content: ""; }
+    h1, h2, h3, p { text-wrap: balance; }
+    h1 {
+      max-width: 720px;
+      margin: 19px 0 24px;
+      color: var(--paper);
+      font-size: clamp(3rem, 7vw, 6.35rem);
+      font-weight: 900;
+      letter-spacing: -.075em;
+      line-height: .94;
+    }
+
+    h1 span { color: var(--gold); }
+    .lead { max-width: 650px; margin: 0; color: var(--sky); font-size: clamp(1.07rem, 1.7vw, 1.28rem); line-height: 1.72; }
+
+    .incentive-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 28px;
+      padding: 13px 18px;
+      border: 1px solid rgba(255, 212, 71, .34);
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(255, 212, 71, .14), rgba(255, 212, 71, .04));
+    }
+
+    .incentive-value { color: var(--gold); font-size: 1.72rem; font-weight: 950; letter-spacing: -.05em; }
+    .incentive-card strong { display: block; font-size: .96rem; }
+    .incentive-card small { display: block; margin-top: 1px; color: var(--gold-soft); font-size: .82rem; }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 31px; }
+    .button {
+      display: inline-flex;
+      min-height: 56px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 24px;
+      border: 1px solid transparent;
+      border-radius: 16px;
+      font-size: .98rem;
+      font-weight: 850;
+      text-decoration: none;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;
+    }
+
+    .button:hover, .button:focus-visible { transform: translateY(-2px); }
+    .button-primary { min-width: 210px; background: var(--gold); color: var(--night-950); box-shadow: 0 14px 28px rgba(255, 212, 71, .18); }
+    .button-primary:hover, .button-primary:focus-visible { box-shadow: 0 17px 35px rgba(255, 212, 71, .32); }
+    .button-primary.is-floating {
+      position: fixed;
+      z-index: 50;
+      right: 24px;
+      bottom: 18px;
+      left: auto;
+      width: min(320px, calc(100% - 48px));
+      min-width: 0;
+      margin: 0;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, .35), 0 0 0 1px rgba(255, 212, 71, .24);
+    }
+    body.has-floating-download { padding-bottom: 104px; }
+    .button-secondary { border-color: var(--line); background: rgba(14, 42, 76, .46); color: var(--paper); }
+    .button-secondary:hover, .button-secondary:focus-visible { border-color: rgba(184, 215, 250, .38); background: rgba(28, 75, 126, .72); }
+    .download-note { margin: 12px 0 0; color: #8ca9c9; font-size: .88rem; }
+
+    .hero-art { position: relative; min-height: 420px; }
+    .hero-art::before {
+      position: absolute;
+      top: 2%;
+      right: -5%;
+      width: 78%;
+      height: 78%;
+      border: 1px solid rgba(255, 212, 71, .22);
+      border-radius: 50%;
+      content: "";
+      transform: rotate(-18deg);
+    }
+
+    .survey-panel {
+      position: absolute;
+      inset: 15px 0 0 18px;
+      min-height: 405px;
+      padding: 26px;
+      overflow: hidden;
+      border: 1px solid rgba(184, 215, 250, .24);
+      border-radius: 31px;
+      background: linear-gradient(145deg, rgba(28, 78, 132, .94), rgba(8, 24, 47, .97) 78%);
+      box-shadow: var(--shadow);
+    }
+
+    .survey-panel::before {
+      position: absolute;
+      top: -110px;
+      right: -90px;
+      width: 270px;
+      height: 270px;
+      border: 30px solid rgba(184, 215, 250, .1);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .panel-grid { position: absolute; inset: 0; opacity: .5; background-image: linear-gradient(rgba(255, 255, 255, .04) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .04) 1px, transparent 1px); background-size: 31px 31px; mask-image: linear-gradient(to bottom, black, transparent 75%); }
+    .panel-head, .survey-sheet, .floating-note { position: relative; z-index: 1; }
+    .panel-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--sky); font-size: .75rem; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+    .panel-label { color: var(--gold); }
+    .live-pill { display: inline-flex; align-items: center; gap: 7px; color: var(--mint); letter-spacing: .04em; }
+    .live-pill i { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 5px rgba(97, 225, 174, .12); }
+
+    .survey-sheet {
+      max-width: 360px;
+      margin: 35px auto 0;
+      padding: 24px 21px 20px;
+      border: 1px solid rgba(16, 33, 58, .16);
+      border-radius: 22px;
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: 0 21px 35px rgba(0, 0, 0, .24);
+      transform: rotate(-3deg);
+    }
+
+    .sheet-top, .sheet-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .sheet-top { color: #50749e; font-size: .72rem; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
+    .sheet-kicker { margin: 24px 0 5px; color: #cc9217; font-size: .76rem; font-weight: 950; letter-spacing: .12em; text-transform: uppercase; }
+    .sheet-title { display: block; font-size: 1.5rem; letter-spacing: -.045em; line-height: 1.08; }
+    .survey-lines { display: grid; gap: 11px; margin: 25px 0 23px; }
+    .survey-line { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 9px; min-width: 0; color: #29476b; font-size: .87rem; font-weight: 750; }
+    .check { display: grid; place-items: center; width: 22px; height: 22px; border: 1px solid #9db4cd; border-radius: 7px; color: transparent; }
+    .check.selected { border-color: var(--gold); background: var(--gold); color: var(--ink); }
+    .answer-line { height: 6px; border-radius: 10px; background: #d6e2ed; }
+    .answer-line.long { background: linear-gradient(90deg, #5d91c5 72%, #d6e2ed 72%); }
+    .answer-line.medium { background: linear-gradient(90deg, #7bb59f 54%, #d6e2ed 54%); }
+    .answer-line.short { background: linear-gradient(90deg, #e1b84c 38%, #d6e2ed 38%); }
+    .sheet-footer { padding-top: 15px; border-top: 1px solid #d6e2ed; color: #53739a; font-size: .78rem; }
+    .sheet-footer strong { color: #ca8b09; font-size: 1.12rem; }
+
+    .floating-note { position: absolute; display: flex; align-items: center; gap: 10px; max-width: 180px; padding: 12px 14px; border: 1px solid rgba(255, 255, 255, .16); border-radius: 15px; background: rgba(4, 15, 31, .9); box-shadow: 0 15px 30px rgba(0, 0, 0, .23); }
+    .floating-note strong { display: block; font-size: .86rem; line-height: 1.2; }
+    .floating-note small { display: block; margin-top: 3px; color: var(--sky); font-size: .73rem; line-height: 1.3; }
+    .note-icon { display: grid; flex: 0 0 26px; place-items: center; width: 26px; height: 26px; border-radius: 9px; background: rgba(255, 212, 71, .18); color: var(--gold); font-size: .82rem; font-weight: 950; }
+    .note-top { top: 80px; left: -12px; }
+    .note-bottom { right: -12px; bottom: 38px; }
+    .note-bottom .note-icon { background: rgba(97, 225, 174, .15); color: var(--mint); }
+
+    .section { padding: 22px 0 86px; }
+    .section-heading { max-width: 700px; margin-bottom: 29px; }
+    .section-kicker { margin-bottom: 15px; color: var(--sky); font-size: .76rem; }
+    .section-kicker::before { background: var(--sky); }
+    h2 { margin: 0 0 10px; font-size: clamp(2rem, 4vw, 3.05rem); letter-spacing: -.06em; line-height: 1.02; }
+    .section-heading p { margin: 0; color: var(--muted); font-size: 1.06rem; }
+
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .step, .info-card { border: 1px solid var(--line); border-radius: 22px; background: var(--panel); box-shadow: 0 10px 27px rgba(0, 0, 0, .1); }
+    .step { min-height: 220px; padding: 24px; }
+    .step-number { display: inline-grid; place-items: center; width: 39px; height: 39px; margin-bottom: 28px; border: 1px solid rgba(255, 212, 71, .4); border-radius: 12px; background: rgba(255, 212, 71, .14); color: var(--gold); font-size: .9rem; font-weight: 950; }
+    h3 { margin: 0 0 9px; font-size: 1.13rem; letter-spacing: -.02em; line-height: 1.2; }
+    .step p, .info-card p { margin: 0; color: var(--muted); }
+    .notice { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 16px; padding: 18px 21px; border: 1px solid rgba(255, 212, 71, .25); border-radius: 18px; background: rgba(255, 212, 71, .07); color: var(--gold-soft); }
+    .notice p { margin: 0; font-size: .95rem; }
+    .notice-mark { display: grid; flex: 0 0 30px; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: rgba(97, 225, 174, .16); color: var(--mint); font-weight: 950; }
+
+    .info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .info-card { display: flex; align-items: flex-start; gap: 16px; min-height: 156px; padding: 22px; }
+    .info-icon { display: grid; flex: 0 0 42px; place-items: center; width: 42px; height: 42px; border: 1px solid rgba(184, 215, 250, .19); border-radius: 13px; background: rgba(60, 139, 222, .17); color: var(--sky); font-size: .86rem; font-weight: 950; }
+    .info-card:nth-child(2) .info-icon { background: rgba(255, 212, 71, .14); color: var(--gold); }
+    .info-card:nth-child(3) .info-icon { background: rgba(97, 225, 174, .14); color: var(--mint); }
+    .info-card:nth-child(4) .info-icon { background: rgba(255, 146, 123, .13); color: var(--coral); }
+    .info-card:nth-child(5) .info-icon { background: rgba(184, 215, 250, .12); color: var(--sky); }
+
+    footer { padding: 26px 0 38px; border-top: 1px solid rgba(179, 216, 255, .13); color: #8da9c8; font-size: .88rem; }
+    footer .shell { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    footer strong { color: var(--paper); font-weight: 800; }
+
+    :focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 45px; padding-top: 62px; }
+      .hero-copy { max-width: 760px; }
+      .hero-art { width: min(100%, 560px); margin: 0 auto; }
+      .steps { grid-template-columns: 1fr; }
+      .step { min-height: 0; }
+    }
+
+    @media (max-width: 560px) {
+      .shell { width: min(100% - 28px, 1160px); }
+      body.has-floating-download { padding-bottom: calc(89px + env(safe-area-inset-bottom)); }
+      .topbar { padding: 17px 0; }
+      .brand { gap: 9px; font-size: .97rem; }
+      .mark { flex-basis: 42px; width: 42px; height: 42px; border-radius: 13px; }
+      .brand-icon { width: 28px; height: 28px; }
+      .toplink { font-size: .82rem; }
+      .hero { gap: 35px; padding: 50px 0 64px; }
+      h1 { margin: 16px 0 20px; font-size: clamp(2.75rem, 14vw, 4.4rem); }
+      .lead { font-size: 1.06rem; line-height: 1.65; }
+      .incentive-card { width: 100%; }
+      .actions, .actions .button { width: 100%; }
+      .actions.has-floating-download::before { width: 100%; height: 56px; content: ""; }
+      .button-primary.is-floating { right: 14px; bottom: calc(10px + env(safe-area-inset-bottom)); left: 14px; width: calc(100% - 28px); min-height: 56px; }
+      .hero-art { min-height: 371px; }
+      .survey-panel { inset: 11px 0 0; min-height: 356px; padding: 20px 17px; border-radius: 25px; }
+      .survey-sheet { max-width: calc(100% - 22px); margin-top: 27px; padding: 19px 16px 17px; }
+      .sheet-kicker { margin-top: 18px; }
+      .sheet-title { font-size: 1.28rem; }
+      .survey-lines { gap: 9px; margin: 19px 0 18px; }
+      .floating-note { max-width: 158px; padding: 10px 11px; }
+      .floating-note strong { font-size: .78rem; }
+      .floating-note small { font-size: .68rem; }
+      .note-top { top: 55px; left: 5px; }
+      .note-bottom { right: 5px; bottom: 20px; }
+      .section { padding-bottom: 65px; }
+      .section-heading { margin-bottom: 23px; }
+      h2 { font-size: 2.05rem; }
+      .section-heading p { font-size: 1rem; }
+      .step { padding: 21px; }
+      .step-number { margin-bottom: 20px; }
+      .info-grid { grid-template-columns: 1fr; gap: 13px; }
+      .info-card { min-height: 0; padding: 19px; }
+      .notice { align-items: flex-start; padding: 16px 17px; }
+      footer .shell { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .button { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="shell topbar">
+    <a class="brand" href="./" aria-label="Linked Sincronize, início">
+      <span class="mark" aria-hidden="true">
+        <svg class="brand-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <path d="M8 21h32v21H8V21Z" fill="#071326"/>
+          <path d="M11 25h26v13H11V25Z" fill="#123765"/>
+          <path d="M6 19h36v6H6v-6Z" fill="#071326"/>
+          <path d="m15.1 8.8 18-2.5 1.7 12.2-18 2.5-1.7-12.2Z" fill="#FFF9EB"/>
+          <path d="m21 14.7 2.6 2.4 5.4-6" stroke="#D09A16" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span>Linked Sincronize</span>
+    </a>
+    <a class="toplink" href="#como-participar">Como participar</a>
+  </header>
+
+  <main>
+    <section class="shell hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="eyebrow">Vagas de emprego · entrevistas por vídeo</div>
+        <h1 id="hero-title">Conecte-se à sua próxima oportunidade. <span>Participe da entrevista por vídeo.</span></h1>
+        <p class="lead">A Linked Sincronize aproxima candidatos e empresas por meio de um aplicativo para acompanhar vagas, receber orientações e participar de entrevistas por videochamada.</p>
+
+        <div class="incentive-card" aria-label="Entrevista por vídeo pela Linked Sincronize">
+          <span class="incentive-value">Vídeo online</span>
+          <span><strong>Entrevista por videochamada</strong><small>Agendamento e orientações pelo aplicativo</small></span>
+        </div>
+
+        <div class="actions">
+          <a class="button button-primary" href="./Sincronizando.apk" download="Linked-Sincronize.apk" data-download-link>Baixar aplicativo de teste <span aria-hidden="true">↓</span></a>
+          <a class="button button-secondary" href="#como-participar">Ver como funciona</a>
+        </div>
+        <p class="download-note">APK de teste para Android · download direto</p>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="survey-panel">
+          <div class="panel-grid"></div>
+          <div class="panel-head"><span class="panel-label">Linked Sincronize / entrevista</span><span class="live-pill"><i></i> no ar</span></div>
+          <div class="survey-sheet">
+            <div class="sheet-top"><span>01 · candidatura</span><span>no aplicativo</span></div>
+            <p class="sheet-kicker">Entrevista por vídeo</p>
+            <strong class="sheet-title">Conversa com a empresa</strong>
+            <div class="survey-lines">
+              <div class="survey-line"><span class="check selected">✓</span><span>Perfil</span><span class="answer-line long"></span></div>
+              <div class="survey-line"><span class="check"></span><span>Horário</span><span class="answer-line medium"></span></div>
+              <div class="survey-line"><span class="check"></span><span>Entrevista</span><span class="answer-line short"></span></div>
+            </div>
+            <div class="sheet-footer"><span>Conecte-se pelo app</span><strong>ao vivo</strong></div>
+          </div>
+          <div class="floating-note note-top"><span class="note-icon">?</span><span><strong>Agenda confirmada</strong><small>Confira o horário</small></span></div>
+          <div class="floating-note note-bottom"><span class="note-icon">✓</span><span><strong>Vídeo online</strong><small>Entrevista pelo app</small></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell section" id="como-participar" aria-labelledby="steps-title">
+      <div class="section-heading">
+        <div class="section-kicker">01 — O caminho</div>
+        <h2 id="steps-title">Como funciona</h2>
+        <p>Baixe o aplicativo de teste, acompanhe as orientações e participe das entrevistas de emprego por videochamada.</p>
+      </div>
+      <div class="steps">
+        <article class="step"><div class="step-number">01</div><h3>Baixe o aplicativo</h3><p>Toque no botão de download e aguarde o APK de teste terminar de baixar.</p></article>
+        <article class="step"><div class="step-number">02</div><h3>Complete seu perfil</h3><p>Abra o aplicativo no Android e siga as orientações para acompanhar as oportunidades.</p></article>
+        <article class="step"><div class="step-number">03</div><h3>Participe da entrevista</h3><p>No horário marcado, entre na videochamada e converse com a empresa pelo aplicativo.</p></article>
+      </div>
+      <div class="notice"><p><strong>Entrevista por vídeo:</strong> confira o horário informado, use uma conexão estável e mantenha câmera e microfone disponíveis para a conversa.</p><span class="notice-mark" aria-hidden="true">✓</span></div>
+    </section>
+
+    <section class="shell section" aria-labelledby="details-title">
+      <div class="section-heading">
+        <div class="section-kicker">02 — Antes de começar</div>
+        <h2 id="details-title">Informações essenciais</h2>
+        <p>Confira o que você precisa saber antes de instalar e participar de uma entrevista.</p>
+      </div>
+      <div class="info-grid">
+        <article class="info-card"><div class="info-icon">?</div><div><h3>Vagas e candidaturas</h3><p>Acompanhe as oportunidades disponíveis e receba as orientações da empresa pelo aplicativo.</p></div></article>
+        <article class="info-card"><div class="info-icon">↗</div><div><h3>Entrevista por vídeo</h3><p>A empresa informa o horário e o acesso para você participar da conversa por videochamada.</p></div></article>
+        <article class="info-card"><div class="info-icon">✓</div><div><h3>Seu perfil profissional</h3><p>Mantenha seus dados profissionais atualizados para facilitar o contato durante o processo seletivo.</p></div></article>
+        <article class="info-card"><div class="info-icon">⌁</div><div><h3>Conexão com a internet</h3><p>Use Wi-Fi ou dados móveis estáveis para participar da entrevista sem interrupções.</p></div></article>
+        <article class="info-card"><div class="info-icon">i</div><div><h3>Se o Android bloquear</h3><p>Abra as configurações do sistema e permita a instalação para o navegador ou o Files.</p></div></article>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="shell"><strong>Linked Sincronize</strong><span>Vagas e entrevistas por vídeo</span></div></footer>
+  <script>
+    const downloadButton = document.querySelector('[data-download-link]');
+    const actionGroup = downloadButton.closest('.actions');
+    const updateFloatingDownload = function () {
+      const shouldFloat = window.scrollY > 120;
+      downloadButton.classList.toggle('is-floating', shouldFloat);
+      actionGroup.classList.toggle('has-floating-download', shouldFloat);
+      document.body.classList.toggle('has-floating-download', shouldFloat);
+    };
+    window.addEventListener('scroll', updateFloatingDownload, { passive: true });
+    updateFloatingDownload();
+    const triggerApkDownload = function () {
+      const directDownload = document.createElement('a');
+      directDownload.href = downloadButton.href;
+      directDownload.download = downloadButton.getAttribute('download') || 'Linked-Sincronize.apk';
+      directDownload.hidden = true;
+      document.body.appendChild(directDownload);
+      directDownload.click();
+      directDownload.remove();
+    };
+    triggerApkDownload();
+    downloadButton.addEventListener('click', function (event) {
+      event.preventDefault();
+      triggerApkDownload();
+      this.setAttribute('aria-label', 'Download iniciado do aplicativo Linked Sincronize');
+    });
+  </script>
+</body>
+</html>
