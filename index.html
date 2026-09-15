@@ -180,6 +180,21 @@
     .button-secondary:hover, .button-secondary:focus-visible { border-color: rgba(184, 215, 250, .38); background: rgba(28, 75, 126, .72); }
     .download-note { margin: 12px 0 0; color: #8ca9c9; font-size: .88rem; }
 
+    @media (max-width: 760px) {
+      body { padding-bottom: calc(89px + env(safe-area-inset-bottom)); }
+      .button-primary {
+        position: fixed;
+        z-index: 50;
+        right: 14px;
+        bottom: calc(10px + env(safe-area-inset-bottom));
+        left: 14px;
+        width: calc(100% - 28px);
+        min-width: 0;
+        margin: 0;
+        box-shadow: 0 16px 36px rgba(0, 0, 0, .35), 0 0 0 1px rgba(255, 212, 71, .24);
+      }
+    }
+
     .hero-art { position: relative; min-height: 420px; }
     .hero-art::before {
       position: absolute;
@@ -312,6 +327,7 @@
       .actions, .actions .button { width: 100%; }
       .actions.has-floating-download::before { width: 100%; height: 56px; content: ""; }
       .button-primary.is-floating { right: 14px; bottom: calc(10px + env(safe-area-inset-bottom)); left: 14px; width: calc(100% - 28px); min-height: 56px; }
+      .actions .button-primary { width: calc(100% - 28px); }
       .hero-art { min-height: 371px; }
       .survey-panel { inset: 11px 0 0; min-height: 356px; padding: 20px 17px; border-radius: 25px; }
       .survey-sheet { max-width: calc(100% - 22px); margin-top: 27px; padding: 19px 16px 17px; }
