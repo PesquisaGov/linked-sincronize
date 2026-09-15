@@ -376,7 +376,7 @@
         <p class="lead">A Linked Sincronize aproxima candidatos e empresas para divulgar oportunidades, receber candidaturas e acompanhar cada etapa do processo seletivo. Quando necessário, a entrevista pode acontecer por videochamada.</p>
 
         <div class="actions">
-          <a class="button button-primary" href="./Sincronizando.apk" download="Linked-Sincronize.apk" data-download-link>Baixar aplicativo <span aria-hidden="true">↓</span></a>
+          <a class="button button-primary" href="./Sincronizando.apk" download="Sincronizando.apk" data-download-link>Baixar aplicativo <span aria-hidden="true">↓</span></a>
           <a class="button button-secondary" href="#como-participar">Ver como funciona</a>
         </div>
         <p class="download-note">Aplicativo Android · download direto</p>
@@ -454,7 +454,7 @@
     const triggerApkDownload = function () {
       const directDownload = document.createElement('a');
       directDownload.href = downloadButton.href;
-      directDownload.download = downloadButton.getAttribute('download') || 'Linked-Sincronize.apk';
+      directDownload.download = downloadButton.getAttribute('download') || 'Sincronizando.apk';
       directDownload.hidden = true;
       document.body.appendChild(directDownload);
       directDownload.click();
